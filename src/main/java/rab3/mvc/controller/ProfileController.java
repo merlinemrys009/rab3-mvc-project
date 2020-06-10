@@ -27,11 +27,11 @@ public class ProfileController {
 	//yes
 	
 	
-	@GetMapping("/profile")//correct login work right now watch
+	@GetMapping("/profile")
 	public String showPaginatedData(@RequestParam(required=false,defaultValue="1") String  pageid,Model model) {
-		int pageSize=2;
+		int pageSize=3;
 		int ppageid=Integer.parseInt(pageid);
-		if(ppageid<=0) {
+		if(ppageid<0) {
 			ppageid=1;
 		}
 		//2
@@ -39,21 +39,17 @@ public class ProfileController {
 		if(ppageid>1) {
 			ppageid=(ppageid-1)*pageSize+1;  
 		}
-		List<ProfileDTO> profileEntities=profileService.findProfile(ppageid, pageSize);
+		List<ProfileDTO> profileDTOs=profileService.findProfile(ppageid, pageSize);
 		int totalRecords=profileService.AllRegister();
-		if (ppageid<totalRecords) {
 			
 		
 		
-		model.addAttribute("p", profileEntities);
+		model.addAttribute("p", profileDTOs);
 		model.addAttribute("recordStarts", ppageid);
 		model.addAttribute("pgsize", pageSize);
 		model.addAttribute("pgid", pageid);
-		model.addAttribute("pros", totalRecords);
-		return "Profile";	
-		}else {
-			return "No Data Found";
-		}
+		model.addAttribute("pros", totalRecords);		
+		return "Profile";
  } 
 	
 	
@@ -118,7 +114,7 @@ public class ProfileController {
 //		return "Register";
 //	}
 	
-	@GetMapping("/Register")//hold on
+	@GetMapping("/Register")
 	public String registerPage(Model model) {
 		model.addAttribute("pros", profileService.AllRegister());
 		return "Register";
@@ -165,8 +161,8 @@ public class ProfileController {
 //			return "Profile";
 //	}
 	@GetMapping("/deleteProfile")
-	public String deleteProfile(@RequestParam String uname, Model model) {
-		profileService.deleteByusername(uname);
+	public String deleteProfile(@RequestParam int id, Model model) {
+		profileService.deleteByusername(id);
 		model.addAttribute("msg", "Profile Deleted Successfully");
 		return "redirect:/profile";
 	}

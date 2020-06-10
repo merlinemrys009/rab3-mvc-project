@@ -12,7 +12,7 @@ public interface ProfileDao {
 	List<ProfileEntity> findAll(int ppageid, int pageSize);
 	ProfileEntity searchProfile(String email);
 	int AllRegister();
-	String deleteByusername(String uname);
+	String deleteByusername(int id);
 	byte[] findPhotoById(int id);
 	default ProfileEntity auth(String username, String password) {
 		return null;

@@ -16,42 +16,42 @@ import rab3.mvc.dao.entity.ProfileEntity;
 @Transactional
 public class ProfileOrmImpl implements ProfileDao {
 	@Autowired
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-    private Session getSession(){
-             return sessionFactory.getCurrentSession();
-    }
+	private Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
-    @Override
-	public ProfileEntity auth(String username,String password) {
-		TypedQuery<ProfileEntity> query=getSession().createQuery("from ProfileEntity dt where dt.username=:pusername and dt.password=:ppassword"); //HQL
+	@Override
+	public ProfileEntity auth(String username, String password) {
+		TypedQuery<ProfileEntity> query = getSession().createQuery("from ProfileEntity dt where dt.username=:pusername and dt.password=:ppassword"); // HQL
 		query.setParameter("pusername", username);
 		query.setParameter("ppassword", password);
-		 ProfileEntity  profileEntity=null;
-		 try {
-			 profileEntity=query.getSingleResult();
-		 }catch (Exception e) {
-			 //e.printStackTrace();
+		ProfileEntity profileEntity = null;
+		try {
+			profileEntity = query.getSingleResult();
+		} catch (Exception e) {
+			// e.printStackTrace();
 		}
 		return profileEntity;
-    }
-    
-    @Override
+	}
+
+	@Override
 	public String forgetPassword(String email) {
-		TypedQuery<ProfileEntity> query=getSession().createQuery("from ProfileEntity dt where dt.email=:pemail"); //HQL
-		 query.setParameter("pemail", email);
-		 ProfileEntity  profileEntity=null;
-		 try {
-			 profileEntity=query.getSingleResult();
-		 }catch (Exception e) {
-			 //e.printStackTrace();
+		TypedQuery<ProfileEntity> query = getSession().createQuery("from ProfileEntity dt where dt.email=:pemail"); // HQL
+		query.setParameter("pemail", email);
+		ProfileEntity profileEntity = null;
+		try {
+			profileEntity = query.getSingleResult();
+		} catch (Exception e) {
+			// e.printStackTrace();
 		}
-		return profileEntity!=null ? profileEntity.getPassword() : null;
+		return profileEntity != null ? profileEntity.getPassword() : null;
 	}
 
 	@Override
 	public String saveProfile(ProfileEntity profileEntity) {
-		//Session session=this.getSession();
+		// Session session=this.getSession();
 		this.getSession().save(profileEntity);
 		return "success";
 	}
@@ -69,7 +69,15 @@ public class ProfileOrmImpl implements ProfileDao {
 
 	@Override
 	public List<ProfileEntity> findAll(int ppageid, int pageSize) {
-		Query<ProfileEntity> query=this.getSession().createQuery("from ProfileEntity limit= 3");//+ (ppageid)+","+pageSize);
+		Query<ProfileEntity> query = this.getSession().createQuery("from ProfileEntity");
+		if (ppageid > 0) {
+			query.setFirstResult(0);
+
+		}
+		if (pageSize > 0) {
+			query.setMaxResults(pageSize);
+
+		}
 		return query.list();
 	}
 
@@ -78,25 +86,24 @@ public class ProfileOrmImpl implements ProfileDao {
 		return this.getSession().get(ProfileEntity.class, id).getHphoto();
 	}
 
-	
 	@Override
 	public ProfileEntity searchProfile(String email) {
 		return this.getSession().get(ProfileEntity.class, email);
-		
+
 	}
 
 	@Override
 	public int AllRegister() {
-		// TODO Auto-generated method stub
-		return 0;
+		Query query = this.getSession().createQuery("select count(*) from ProfileEntity");
+		long num = (long) query.getSingleResult();
+		return (int) num;
 	}
 
 	@Override
-	public String deleteByusername(String uname) {
-		this.getSession().delete(uname);
+	public String deleteByusername(int id) {
+		ProfileEntity profileEntity = this.getSession().byId(ProfileEntity.class).load(id);
+		this.getSession().delete(profileEntity);
 		return "success";
 	}
-
-
 
 }

@@ -13,15 +13,13 @@ public interface ProfileService {
 
 	ProfileEntity findProfileById(int id);
 
-	List<ProfileDTO> findProfile();
-
 //	ProfileEntity findProfile(String email);
 
 	ProfileEntity findSingleProfile(String email);
 	
 	int AllRegister();
 
-	String deleteByusername(String uname);
+	String deleteByusername(int id);
 
 	byte[] findPhotoById(int id);
 
@@ -32,6 +30,7 @@ public interface ProfileService {
 	ProfileDTO auth(String username, String password);
 
 	List<ProfileDTO> findProfile(int ppageid, int pageSize);
+
 
 	
 	

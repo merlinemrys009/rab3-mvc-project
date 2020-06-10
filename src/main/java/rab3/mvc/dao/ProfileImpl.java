@@ -128,10 +128,10 @@ public class ProfileImpl implements ProfileDao {
 	}
 
 	@Override
-	public String deleteByusername(String username) {
+	public String deleteByusername(int id) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(datasource);
 		String sql = "DELETE from webtabledemo where username =?";
-		jdbcTemplate.update(sql, new Object[] { username });
+		jdbcTemplate.update(sql, new Object[] { id });
 		return "success";
 	}
 

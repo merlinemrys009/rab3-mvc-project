@@ -113,8 +113,8 @@ public  class ProfileServiceImpl  implements  ProfileService{//it not open shoul
 //	}
 
 	@Override
-	public String deleteByusername(String uname) {
-		String result=profileDao.deleteByusername(uname);
+	public String deleteByusername(int id) {
+		String result=profileDao.deleteByusername(id);
 		return result;
 	}
 
@@ -132,11 +132,6 @@ public  class ProfileServiceImpl  implements  ProfileService{//it not open shoul
 		return profileDTO;
 	}
 
-	@Override
-	public List<ProfileDTO> findProfile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 

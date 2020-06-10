@@ -91,12 +91,12 @@ body {
 		<table class="table table-dark table-striped">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>User Name</th>
 					<th>Name</th>
 					<th>Email</th>
 					<th>Gender</th>
-					<th>Grade</th>
-					<th>Subject</th>
+					<th>Role</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -117,7 +117,7 @@ body {
         <img src="imageLoader?id=<%=dto.getId() %>"  class="zoom">  
 
         </td>
-					<td><a href="deleteProfile?uname=<%=dto.getUsername() %>"> <img
+					<td><a href="deleteProfile?id=<%=dto.getId() %>"> <img
 							src="imag/delete.png" style="height: 24px;">
 					</a> &nbsp; &nbsp; &nbsp; <a href="editProfile?id=<%=dto.getId() %>">
 							<img src="imag/edit.png" style="height: 24px;">
