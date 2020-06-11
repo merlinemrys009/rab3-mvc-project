@@ -8,7 +8,7 @@ public interface ProfileDao {
 	String forgetPassword(String email);
 	String saveProfile(ProfileEntity profileEntity);
 	ProfileEntity findById(int id);
-	String update(ProfileEntity profileEntity);
+	String update(ProfileEntity profileEntity );
 	List<ProfileEntity> findAll(int ppageid, int pageSize);
 	ProfileEntity searchProfile(String email);
 	int AllRegister();

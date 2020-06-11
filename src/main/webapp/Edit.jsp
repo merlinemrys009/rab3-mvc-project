@@ -40,6 +40,8 @@ body {
        <input type="hidden"  name="id"  value="${p.id}">
       <label style=color:white><b>UserName</b></label>
       <input type="text" name="username"  class="form-control"   value="${p.username}">
+      <label style=color:white><b>Password</b></label>
+      <input type="password" name="username"  class="form-control"   value="${p.password}" readonly>
         <label style=color:white><b>Name</b></label>
       <input type="text" name="name"  class="form-control" value="${p.name}">
       <label style=color:white><b>Email</b></label>
@@ -49,6 +51,8 @@ body {
          <option  ${p.gender=='Male' ? 'selected' :''}>Male</option>
          <option  ${p.gender=='Female' ? 'selected' :''}>Female</option>
       </select>
+      <label style=color:white><b>Role</b></label>
+      <input type="text" name="role"  class="form-control"   value="${p.role}" readonly>
        <label style=color:white><b>Image</b></label>
       <input type=file name="photo"  class="form-control"value="${p.photo}">
       <br/>

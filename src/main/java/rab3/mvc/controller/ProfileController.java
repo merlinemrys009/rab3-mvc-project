@@ -146,7 +146,7 @@ public class ProfileController {
 	}
 
 	@PostMapping("/updateProfile")
-	public String postEditProfile(@ModelAttribute ProfileDTO profileDTO, Model model) {
+	public String postEditProfile(@ModelAttribute ProfileDTO profileDTO, Model model ) {
 		profileService.updateProfile(profileDTO);
 		model.addAttribute("p", profileDTO);
 		model.addAttribute("msg", "Profile has successfully updated!!");

@@ -1,5 +1,7 @@
 package rab3.mvc.dao;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -88,7 +90,16 @@ public class ProfileOrmImpl implements ProfileDao {
 
 	@Override
 	public ProfileEntity searchProfile(String email) {
-		return this.getSession().get(ProfileEntity.class, email);
+//		return this.getSession().get(ProfileEntity.class, email);
+		TypedQuery<ProfileEntity> query = getSession().createQuery("from ProfileEntity dt where dt.email=:pemail"); // HQL
+		query.setParameter("pemail", email);
+		ProfileEntity profileEntity = null;
+		try {
+			profileEntity = query.getSingleResult();
+		} catch (Exception e) {
+			// e.printStackTrace();
+		}
+		return profileEntity;
 
 	}
 

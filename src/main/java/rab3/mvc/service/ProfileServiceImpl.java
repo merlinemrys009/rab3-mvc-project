@@ -73,7 +73,7 @@ public  class ProfileServiceImpl  implements  ProfileService{//it not open shoul
 	}
 
 	@Override
-	public 	String updateProfile(ProfileDTO profileDTO) {
+	public 	String updateProfile(ProfileDTO profileDTO ) {
 		ProfileEntity profileEntity=new ProfileEntity();
 		BeanUtils.copyProperties(profileDTO, profileEntity);
 		String result=profileDao.update(profileEntity);

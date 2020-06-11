@@ -23,13 +23,14 @@ public interface ProfileService {
 
 	byte[] findPhotoById(int id);
 
-	String updateProfile(ProfileDTO profileDTO);
-
 	String persist(ProfileDTO profileDTO);
 
 	ProfileDTO auth(String username, String password);
 
 	List<ProfileDTO> findProfile(int ppageid, int pageSize);
+
+	String updateProfile(ProfileDTO profileDTO);
+
 
 
 	
